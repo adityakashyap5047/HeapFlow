@@ -1,8 +1,14 @@
 import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
  
-export function middleware(request: NextRequest) {
-  return NextResponse.redirect(new URL('/home', request.url))
+import getOrCreateDB from './models/server/dbSetup'
+import getOrCreateStorage from './models/server/storageSetup'
+
+export async function middleware() {
+    await Promise.all([
+        getOrCreateDB(),
+        getOrCreateStorage()
+    ])
+  return NextResponse.next()
 }
  
 // See "Matching Paths" below to learn more
