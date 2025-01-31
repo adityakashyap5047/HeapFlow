@@ -2,7 +2,6 @@
 
 import { Models } from "appwrite";
 import React from "react";
-import VoteButtons from "./VoteButtons";
 import { useAuthStore } from "@/store/Auth";
 import { avatars } from "@/models/client/config";
 import RTE, { MarkdownPreview } from "./RTE";
@@ -10,6 +9,7 @@ import Comments from "./Comments";
 import slugify from "@/utils/slugify";
 import Link from "next/link";
 import { IconTrash } from "@tabler/icons-react";
+import VoteButtons from "./VoteButtons";
 
 const Answers = ({
     answers: _answers,
