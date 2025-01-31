@@ -24,14 +24,25 @@ export async function POST(request: NextRequest) {
             status: 201
         });
 
-    } catch (error: any) {
-        return NextResponse.json(
-            {
-                error: error?.message || "Error creating while answer"
-            },
-            {
-                status: error?.status || error?.code || 500
-            }
-        )
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            return NextResponse.json(
+                {
+                    error: error.message || "Error creating while answer"
+                },
+                {
+                    status: 500
+                }
+            );
+        } else {
+            return NextResponse.json(
+                {
+                    error: "Unknown error occurred"
+                },
+                {
+                    status: 500
+                }
+            );
+        }
     }
 }
