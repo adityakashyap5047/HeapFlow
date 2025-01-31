@@ -37,7 +37,53 @@ export async function POST(request: NextRequest) {
         } else {
             return NextResponse.json(
                 {
-                    error: "Unknown error occurred"
+                    error: "Unknown error occurred creating while answer"
+                },
+                {
+                    status: 500
+                }
+            );
+        }
+    }
+}
+
+export async function DELETE(request: NextRequest) {
+    try {
+        const {answerId} = await request.json();
+        const answer = await databases.getDocument(db, answerCollection, answerId);
+
+        const response = await databases.deleteDocument(db, answerCollection, answerId);
+
+        //decrease the reputation
+        // Increase author reputation
+        const prefs = await users.getPrefs<UserPrefs>(answer.authorId)
+        await users.updatePrefs(answer.authorId, {
+            reputation: Number(prefs.reputation) - 1
+        })
+
+        return NextResponse.json(
+            {
+                data: response
+            }, 
+            {
+                status: 200
+            }
+        );
+        
+    } catch (error: unknown) {
+        if (error instanceof Error) {
+            return NextResponse.json(
+                {
+                    error: error.message || "Error while deleting answer"
+                },
+                {
+                    status: 500
+                }
+            );
+        } else {
+            return NextResponse.json(
+                {
+                    error: "Unknown error occurred while deleting answer"
                 },
                 {
                     status: 500
