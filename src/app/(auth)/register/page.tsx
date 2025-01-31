@@ -53,7 +53,8 @@ function RegisterPage() {
             )}
 
             <form onSubmit={handleSubmit}>
-                `${isLoading}`
+                {isLoading && <p>Loading</p>}
+                <p>Register now</p>
             </form>
         </div>
     )
