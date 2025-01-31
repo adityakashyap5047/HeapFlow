@@ -35,7 +35,9 @@ function LoginPage() {
         setIsLoading(() => false)
     }
   return (
-    <div>LoginPage</div>
+    <div>{isLoading} {error}
+      <form onSubmit={handleSubmit}>hello</form>
+    </div>
   )
 }
 
