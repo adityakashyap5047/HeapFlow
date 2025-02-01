@@ -81,7 +81,7 @@ const Page = async ({
                         <Link
                             href={`/users/${userId}/${userSlug}/votes?voteStatus=upvoted`}
                             className={`block w-full rounded-full px-3 py-0.5 duration-200 ${
-                                searchParams?.voteStatus === "upvoted"
+                                voteStatus === "upvoted"
                                     ? "bg-white/20"
                                     : "hover:bg-white/20"
                             }`}
@@ -93,7 +93,7 @@ const Page = async ({
                         <Link
                             href={`/users/${userId}/${userSlug}/votes?voteStatus=downvoted`}
                             className={`block w-full rounded-full px-3 py-0.5 duration-200 ${
-                                searchParams?.voteStatus === "downvoted"
+                                voteStatus === "downvoted"
                                     ? "bg-white/20"
                                     : "hover:bg-white/20"
                             }`}

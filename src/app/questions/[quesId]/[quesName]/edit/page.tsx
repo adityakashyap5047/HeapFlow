@@ -2,11 +2,16 @@ import { db, questionCollection } from "@/models/name";
 import { databases } from "@/models/server/config";
 import EditQues from "./EditQues";
 
+interface PageProps {
+    params: { quesId: string; quesName: string };
+    searchParams?: Record<string, string | string[] | undefined>; // Optional
+}
+
 const getQuestion = async (quesId: string) => {
     return await databases.getDocument(db, questionCollection, quesId);
 };
 
-const Page = async ({ params }: { params: { quesId: string; quesName: string } }) => {
+const Page = async ({ params }: PageProps) => {
     if (!params?.quesId) {
         throw new Error("Question ID is required");
     }
