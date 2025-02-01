@@ -14,20 +14,22 @@ const Page = async ({
 }: {
     searchParams: { page?: string; tag?: string; search?: string };
 }) => {
-    searchParams.page ||= "1";
+    let {page} = await searchParams;
+    const {tag, search} = await searchParams;
+    page ||= "1";
 
     const queries = [
         Query.orderDesc("$createdAt"),
-        Query.offset((+searchParams.page - 1) * 25),
+        Query.offset((+page - 1) * 25),
         Query.limit(25),
     ];
 
-    if (searchParams.tag) queries.push(Query.equal("tags", searchParams.tag));
-    if (searchParams.search)
+    if (tag) queries.push(Query.equal("tags", tag));
+    if (search)
         queries.push(
             Query.or([
-                Query.search("title", searchParams.search),
-                Query.search("content", searchParams.search),
+                Query.search("title", search),
+                Query.search("content", search),
             ])
         );
 

@@ -9,8 +9,16 @@ export default function Home() {
     <>
       <Header/>
       <HeroSectionHeader/>
-      <LatestQuestions/>
-      <TopContributers/>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 p-8">
+  <div className="col-span-1 lg:col-span-2">
+    <p className="text-2xl py-4">Latest Questions</p>
+    <LatestQuestions />
+  </div>
+  <div className="col-span-2 lg:col-span-1">
+    <p className="text-2xl py-4">Top Contributers</p>
+    <TopContributers />
+  </div>
+</div>
       <HeroSection />
     </>
   );
