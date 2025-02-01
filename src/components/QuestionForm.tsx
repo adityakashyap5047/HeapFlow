@@ -53,6 +53,12 @@ const QuestionForm = ({ question }: { question?: Models.Document }) => {
         attachment: null as File | null,
     });
 
+    React.useEffect(() => {
+        if (user?.$id) {
+            setFormData((prev) => ({ ...prev, authorId: user.$id }));
+        }
+    }, [user]);
+
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState("");
 
@@ -138,7 +144,6 @@ const QuestionForm = ({ question }: { question?: Models.Document }) => {
 
     const submit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-
         // didn't check for attachment because it's optional in updating
         if (!formData.title || !formData.content || !formData.authorId) {
             setError(() => "Please fill out all fields");
@@ -185,6 +190,7 @@ const QuestionForm = ({ question }: { question?: Models.Document }) => {
                     name="title"
                     placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
                     type="text"
+                    className="text-black"
                     value={formData.title}
                     onChange={e => setFormData(prev => ({ ...prev, title: e.target.value }))}
                 />
@@ -243,6 +249,7 @@ const QuestionForm = ({ question }: { question?: Models.Document }) => {
                             name="tag"
                             placeholder="e.g. (java c objective-c)"
                             type="text"
+                            className="text-black"
                             value={tag}
                             onChange={e => setTag(() => e.target.value)}
                         />

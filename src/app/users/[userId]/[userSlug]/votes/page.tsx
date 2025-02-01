@@ -17,7 +17,7 @@ const Page = async ({
     searchParams.page ||= "1";
 
     const query = [
-        Query.equal("votedById", params.userId),
+        Query.equal("voteById", params.userId),
         Query.orderDesc("$createdAt"),
         Query.offset((+searchParams.page - 1) * 25),
         Query.limit(25),

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { JSX, useState } from "react";
 import {
   motion,
   AnimatePresence,
@@ -8,6 +8,7 @@ import {
 } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { useAuthStore } from "@/store/Auth";
 
 export const FloatingNav = ({
   navItems,
@@ -22,20 +23,27 @@ export const FloatingNav = ({
 }) => {
   const { scrollYProgress } = useScroll();
 
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(true);
+
+  const { session, logout } = useAuthStore();
+
+  const handleLogout = async () => {
+    await logout();
+  };
 
   useMotionValueEvent(scrollYProgress, "change", (current) => {
     // Check if current is not undefined and is a number
     if (typeof current === "number") {
-      let direction = current! - scrollYProgress.getPrevious()!;
-
-      if (scrollYProgress.get() < 0.05) {
-        setVisible(false);
+      const direction = current! - scrollYProgress.getPrevious()!;
+  
+      if (current < 0) {
+        setVisible(true); // Navbar should be visible when scroll progress is greater than 0
       } else {
-        if (direction < 0) {
-          setVisible(true);
+        // Check scroll direction
+        if (direction > 0) {
+          setVisible(false); // Scroll down, hide the navbar
         } else {
-          setVisible(false);
+          setVisible(true); // Scroll up, show the navbar
         }
       }
     }
@@ -60,7 +68,7 @@ export const FloatingNav = ({
           className
         )}
       >
-        {navItems.map((navItem: any, idx: number) => (
+        {navItems.map((navItem, idx: number) => (
           <Link
             key={`link=${idx}`}
             href={navItem.link}
@@ -72,10 +80,34 @@ export const FloatingNav = ({
             <span className="hidden sm:block text-sm">{navItem.name}</span>
           </Link>
         ))}
-        <button className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full">
-          <span>Login</span>
-          <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent  h-px" />
-        </button>
+        {session ? (
+          <button
+            className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full"
+            onClick={handleLogout}
+          >
+            <span>Logout</span>
+            <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent  h-px" />
+          </button>
+        ) : (
+          <>
+            <Link href="/register">
+            <button
+            className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full"
+          >
+            <span>Sign up</span>
+            <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent  h-px" />
+          </button>
+            </Link>
+            <Link href="/login">
+            <button
+            className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full"
+          >
+            <span>Login</span>
+            <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent  h-px" />
+          </button>
+            </Link>
+          </>
+        )}
       </motion.div>
     </AnimatePresence>
   );
