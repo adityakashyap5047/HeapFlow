@@ -16,21 +16,21 @@ interface PageProps {
 const Page = async ({
     searchParams,
 }: PageProps) => {
-    const resolvedParams = await searchParams;
-    resolvedParams.page ||= "1";
+    const resolvedSearchParams = await searchParams;
+    resolvedSearchParams.page ||= "1";
 
     const queries = [
         Query.orderDesc("$createdAt"),
-        Query.offset((+resolvedParams.page - 1) * 25),
+        Query.offset((+resolvedSearchParams.page - 1) * 25),
         Query.limit(25),
     ];
 
-    if (resolvedParams.tag) queries.push(Query.equal("tags", resolvedParams.tag));
-    if (resolvedParams.search)
+    if (resolvedSearchParams.tag) queries.push(Query.equal("tags", resolvedSearchParams.tag));
+    if (resolvedSearchParams.search)
         queries.push(
             Query.or([
-                Query.search("title", resolvedParams.search),
-                Query.search("content", resolvedParams.search),
+                Query.search("title", resolvedSearchParams.search),
+                Query.search("content", resolvedSearchParams.search),
             ])
         );
 
