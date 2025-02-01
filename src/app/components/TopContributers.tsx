@@ -1,11 +1,11 @@
 import { cn } from "@/lib/utils";
 
-import { AnimatedList } from "@/components/magicui/animated-list";
 import { users } from "@/models/server/config";
 import { Models, Query } from "node-appwrite";
 import { UserPrefs } from "@/store/Auth";
 import convertDateToRelativeTime from "@/utils/relativeTime";
 import { avatars } from "@/models/client/config";
+import { AnimatedList } from "@/components/magicui/animated-list";
 
 const Notification = ({ user }: { user: Models.User<UserPrefs> }) => {
     return (
@@ -23,7 +23,7 @@ const Notification = ({ user }: { user: Models.User<UserPrefs> }) => {
             <div className="flex flex-row items-center gap-3">
                 <picture>
                     <img
-                        src={avatars.getInitials(user.name, 40, 40).href}
+                        src={avatars.getInitials(user.name, 40, 40)}
                         alt={user.name}
                         className="rounded-2xl"
                     />

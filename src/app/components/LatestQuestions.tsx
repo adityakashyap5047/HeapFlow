@@ -1,8 +1,8 @@
 "use client";
 
-import IconCloud from "@/components/magicui/icon-cloud";
-import Particles from "@/components/magicui/particles";
-import ShimmerButton from "@/components/magicui/shimmer-button";
+import { Particles } from "@/components/magicui/particles";
+import { ShimmerButton } from "@/components/magicui/shimmer-button";
+import { IconCloud } from "@/components/magicui/icon-cloud";
 import { useAuthStore } from "@/store/Auth";
 import Link from "next/link";
 import React from "react";
@@ -42,6 +42,10 @@ const slugs = [
 
 const HeroSectionHeader = () => {
     const { session } = useAuthStore();
+
+    const images = slugs.map(
+        (slug) => `https://cdn.simpleicons.org/${slug}/${slug}`,
+    );
 
     return (
         <div className="container mx-auto px-4">
@@ -94,7 +98,7 @@ const HeroSectionHeader = () => {
                 </div>
                 <div className="flex items-center justify-center">
                     <div className="relative max-w-[32rem] overflow-hidden">
-                        <IconCloud iconSlugs={slugs} />
+                        <IconCloud images={images} />
                     </div>
                 </div>
             </div>
