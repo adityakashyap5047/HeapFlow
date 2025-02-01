@@ -1,3 +1,4 @@
+/* eslint-disable */
 "use client";
 
 import { motion } from "motion/react";
@@ -135,6 +136,7 @@ export function AnimatedGridPattern({
             transition={{
               duration,
               repeat: 1,
+              repeatDelay,
               delay: index * 0.1,
               repeatType: "reverse",
             }}
