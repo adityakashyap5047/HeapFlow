@@ -1,14 +1,17 @@
 import { db, questionCollection } from "@/models/name";
 import { databases } from "@/models/server/config";
-import React from "react";
 import EditQues from "./EditQues";
 
+const getQuestion = async (quesId: string) => {
+    return await databases.getDocument(db, questionCollection, quesId);
+};
+
 const Page = async ({ params }: { params: { quesId: string; quesName: string } }) => {
-    const {quesId} = await params;
-    // const question = await databases.getDocument(db, questionCollection, quesId);
-    const [question] = await Promise.all([
-        databases.getDocument(db, questionCollection, quesId)
-    ])
+    if (!params?.quesId) {
+        throw new Error("Question ID is required");
+    }
+
+    const question = await getQuestion(params.quesId);
 
     return <EditQues question={question} />;
 };
