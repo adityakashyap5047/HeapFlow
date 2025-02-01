@@ -1,3 +1,4 @@
+import Pagination from "@/components/Pagination";
 import QuestionCard from "@/components/QuestionCard";
 import { answerCollection, db, questionCollection, voteCollection } from "@/models/name";
 import { databases, users } from "@/models/server/config";
@@ -5,12 +6,23 @@ import { UserPrefs } from "@/store/Auth";
 import { Query } from "node-appwrite";
 import React from "react";
 
-const LatestQuestions = async () => {
-    const questions = await databases.listDocuments(db, questionCollection, [
-        Query.limit(5),
+const Page = async ({
+    params,
+    searchParams,
+}: {
+    params: { userId: string; userSlug: string };
+    searchParams: { page?: string };
+}) => {
+    searchParams.page ||= "1";
+
+    const queries = [
+        Query.equal("authorId", params.userId),
         Query.orderDesc("$createdAt"),
-    ]);
-    console.log("Fetched Questions:", questions);
+        Query.offset((+searchParams.page - 1) * 25),
+        Query.limit(25),
+    ];
+
+    const questions = await databases.listDocuments(db, questionCollection, queries);
 
     questions.documents = await Promise.all(
         questions.documents.map(async ques => {
@@ -40,15 +52,19 @@ const LatestQuestions = async () => {
         })
     );
 
-    console.log("Latest question")
-    console.log(questions)
     return (
-        <div className="space-y-6">
-            {questions.documents.map(question => (
-                <QuestionCard key={question.$id} ques={question} />
-            ))}
+        <div className="px-4">
+            <div className="mb-4">
+                <p>{questions.total} questions</p>
+            </div>
+            <div className="mb-4 max-w-3xl space-y-6">
+                {questions.documents.map(ques => (
+                    <QuestionCard key={ques.$id} ques={ques} />
+                ))}
+            </div>
+            <Pagination total={questions.total} limit={25} />
         </div>
     );
 };
 
-export default LatestQuestions;
+export default Page;

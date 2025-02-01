@@ -1,55 +1,24 @@
 import React from "react";
-import Link from "next/link";
-import { AnimatedGridPattern } from "@/components/magicui/animated-grid-pattern";
-import { cn } from "@/lib/utils";
+import { databases } from "@/models/server/config";
+import { db, questionAttachmentBucket, questionCollection } from "@/models/name";
+import { Query } from "node-appwrite";
+import slugify from "@/utils/slugify";
+import { storage } from "@/models/client/config";
+import { HeroParallax } from "@/components/ui/hero-parallax";
 
-const Footer = () => {
-    const items = [
-        {
-            title: "Home",
-            href: "/",
-        },
-        {
-            title: "About",
-            href: "/about",
-        },
-        {
-            title: "Privacy Policy",
-            href: "/privacy-policy",
-        },
-        {
-            title: "Terms of Service",
-            href: "/terms-of-service",
-        },
-        {
-            title: "Questions",
-            href: "/questions",
-        },
-    ];
+export default async function HeroSection() {
+    const questions = await databases.listDocuments(db, questionCollection, [
+        Query.orderDesc("$createdAt"),
+        Query.limit(15),
+    ]);
+
     return (
-        <footer className="relative block overflow-hidden border-t border-solid border-white/30 py-20">
-            <div className="container mx-auto px-4">
-                <ul className="flex flex-wrap items-center justify-center gap-3">
-                    {items.map(item => (
-                        <li key={item.href}>
-                            <Link href={item.href}>{item.title}</Link>
-                        </li>
-                    ))}
-                </ul>
-                <div className="mt-4 text-center">&copy; {new Date().getFullYear()} Riverpod</div>
-            </div>
-            <AnimatedGridPattern
-                numSquares={30}
-                maxOpacity={0.4}
-                duration={3}
-                repeatDelay={1}
-                className={cn(
-                    "[mask-image:radial-gradient(3000px_circle_at_center,white,transparent)]",
-                    "inset-y-[-50%] h-[200%] skew-y-6"
-                )}
-            />
-        </footer>
+        <HeroParallax
+            products={questions.documents.map(q => ({
+                title: q.title,
+                link: `/questions/${q.$id}/${slugify(q.title)}`,
+                thumbnail: storage.getFilePreview(questionAttachmentBucket, q.attachmentId),
+            }))}
+        />
     );
-};
-
-export default Footer;
+}
