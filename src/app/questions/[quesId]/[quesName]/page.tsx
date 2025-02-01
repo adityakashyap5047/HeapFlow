@@ -25,29 +25,33 @@ import EditQuestion from "./EditQuestion";
 import DeleteQuestion from "./DeleteQuestion";
 import { Particles } from "@/components/magicui/particles";
 
-const Page = async ({ params }: { params: { quesId: string; quesName: string } }) => {
-    const {quesId} = await params;
+interface PageProps {
+    params: Promise<{ quesId: string; quesName: string }>; 
+}
+
+const Page = async ({ params }: PageProps) => {
+    const resolvedParams = await params;
     const [question, answers, upvotes, downvotes, comments] = await Promise.all([
-        databases.getDocument(db, questionCollection, quesId),
+        databases.getDocument(db, questionCollection, resolvedParams.quesId),
         databases.listDocuments(db, answerCollection, [
             Query.orderDesc("$createdAt"),
-            Query.equal("questionId", quesId),
+            Query.equal("questionId", resolvedParams.quesId),
         ]),
         databases.listDocuments(db, voteCollection, [
-            Query.equal("typeId", quesId),
+            Query.equal("typeId", resolvedParams.quesId),
             Query.equal("type", "question"),
             Query.equal("voteStatus", "upvoted"),
             Query.limit(1), // for optimization
         ]),
         databases.listDocuments(db, voteCollection, [
-            Query.equal("typeId", quesId),
+            Query.equal("typeId", resolvedParams.quesId),
             Query.equal("type", "question"),
             Query.equal("voteStatus", "downvoted"),
             Query.limit(1), // for optimization
         ]),
         databases.listDocuments(db, commentCollection, [
             Query.equal("type", "question"),
-            Query.equal("typeId", quesId),
+            Query.equal("typeId", resolvedParams.quesId),
             Query.orderDesc("$createdAt"),
         ]),
     ]);
