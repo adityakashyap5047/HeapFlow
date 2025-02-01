@@ -23,7 +23,7 @@ import { TracingBeam } from "@/components/ui/tracing-beam";
 import { ShimmerButton } from "@/components/magicui/shimmer-button";
 import EditQuestion from "./EditQuestion";
 import DeleteQuestion from "./DeleteQuestion";
-import { Particles } from "@/components/ui/particles";
+import { Particles } from "@/components/magicui/particles";
 
 const Page = async ({ params }: { params: { quesId: string; quesName: string } }) => {
     const [question, answers, upvotes, downvotes, comments] = await Promise.all([
