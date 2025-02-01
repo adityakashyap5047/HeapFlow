@@ -9,27 +9,28 @@ import Pagination from "@/components/Pagination";
 import { ShimmerButton } from "@/components/magicui/shimmer-button";
 import Search from "./Search";
 
+interface PageProps {
+    searchParams: Promise<{ page?: string; tag?: string; search?: string }>; 
+}
+
 const Page = async ({
     searchParams,
-}: {
-    searchParams: { page?: string; tag?: string; search?: string };
-}) => {
-    let {page} = await searchParams;
-    const {tag, search} = await searchParams;
-    page ||= "1";
+}: PageProps) => {
+    const resolvedParams = await searchParams;
+    resolvedParams.page ||= "1";
 
     const queries = [
         Query.orderDesc("$createdAt"),
-        Query.offset((+page - 1) * 25),
+        Query.offset((+resolvedParams.page - 1) * 25),
         Query.limit(25),
     ];
 
-    if (tag) queries.push(Query.equal("tags", tag));
-    if (search)
+    if (resolvedParams.tag) queries.push(Query.equal("tags", resolvedParams.tag));
+    if (resolvedParams.search)
         queries.push(
             Query.or([
-                Query.search("title", search),
-                Query.search("content", search),
+                Query.search("title", resolvedParams.search),
+                Query.search("content", resolvedParams.search),
             ])
         );
 
