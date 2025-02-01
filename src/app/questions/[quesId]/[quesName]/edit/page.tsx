@@ -17,7 +17,7 @@ const Page = async ({ params }: PageProps) => {
         throw new Error("Question ID is required");
     }
 
-    const question = await getQuestion(resolvedParams.quesId);
+    const question = await getQuestion(resolvedParams?.quesId);
 
     return <EditQues question={question} />;
 };
