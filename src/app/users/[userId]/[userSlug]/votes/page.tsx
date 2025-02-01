@@ -20,10 +20,6 @@ const Page = async ({
     const resolvedParams = await params;
     const resolvedSearchParams = await searchParams;
 
-    // let {page} = await searchParams;
-    // const {voteStatus} = await searchParams;
-    // const {userId, userSlug} = await params;
-
     resolvedSearchParams.page ||= "1";
 
     const query = [
