@@ -11,6 +11,25 @@ import { ID, Models } from "appwrite";
 import Link from "next/link";
 import React from "react";
 
+const LabelInputContainer = ({
+    children,
+    className,
+}: {
+    children: React.ReactNode;
+    className?: string;
+}) => {
+    return (
+        <div
+            className={cn(
+                "relative flex w-full flex-col space-y-2 overflow-hidden rounded-md border border-white/20 bg-slate-950 p-2",
+                className
+            )}
+        >
+            {children}
+        </div>
+    );
+};
+
 const Comments = ({
     comments: _comments,
     type,
@@ -24,11 +43,15 @@ const Comments = ({
 }) => {
     const [comments, setComments] = React.useState(_comments);
     const [newComment, setNewComment] = React.useState("");
+    const [error, setError] = React.useState("");
     const { user } = useAuthStore();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!newComment || !user) return;
+        if (!newComment || !user) {
+            setError(() => "You must be logged in or provide a comment before submitting.");
+            return;
+        }
 
         try {
             const response = await databases.createDocument(db, commentCollection, ID.unique(), {
@@ -99,7 +122,7 @@ const Comments = ({
                 </React.Fragment>
             ))}
             <hr className="border-white/40" />
-            <form onSubmit={handleSubmit} className="flex items-center gap-2">
+            <form onSubmit={handleSubmit} className={error ? "flex flex-col gap-2 items-center" : "flex flex-col md:flex-row items-center gap-2"}>
                 <textarea
                     className="w-full rounded-md border border-white/20 bg-white/10 p-2 outline-none"
                     rows={1}
@@ -107,7 +130,14 @@ const Comments = ({
                     value={newComment}
                     onChange={e => setNewComment(() => e.target.value)}
                 />
-                <button className="shrink-0 rounded bg-orange-500 px-4 py-2 font-bold text-white hover:bg-orange-600">
+                {error && (
+                    <LabelInputContainer>
+                        <div className="text-center">
+                            <span className="text-red-500">{error}</span>
+                        </div>
+                    </LabelInputContainer>
+                )}
+                <button className="w-3/4 md:w-auto shrink-0 rounded bg-orange-500 px-4 py-2 font-bold text-white hover:bg-orange-600">
                     Add Comment
                 </button>
             </form>

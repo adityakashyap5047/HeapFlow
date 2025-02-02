@@ -7,7 +7,7 @@ import React from "react";
 
 const LatestQuestions = async () => {
     const questions = await databases.listDocuments(db, questionCollection, [
-        Query.limit(5),
+        Query.limit(4),
         Query.orderDesc("$createdAt"),
     ]);
 

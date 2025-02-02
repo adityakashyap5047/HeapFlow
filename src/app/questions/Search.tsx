@@ -25,6 +25,7 @@ const Search = () => {
         <form className="flex w-full flex-row gap-4" onSubmit={handleSearch}>
             <Input
                 type="text"
+                className="text-white bg-[#020617] border border-gray-500 focus:border-gray-400 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
                 placeholder="Search questions"
                 value={search}
                 onChange={e => setSearch(e.target.value)}

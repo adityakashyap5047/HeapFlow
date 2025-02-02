@@ -65,7 +65,7 @@ const Page = async ({
     );
 
     return (
-        <div className="container mx-auto px-4 pb-20 pt-36">
+        <div className="container mx-auto px-4 pb-20 pt-36 md:max-w-3xl">
             <div className="mb-10 flex items-center justify-between">
                 <h1 className="text-3xl font-bold">All Questions</h1>
                 <Link href="/questions/ask">
@@ -82,7 +82,7 @@ const Page = async ({
             <div className="mb-4">
                 <p>{questions.total} questions</p>
             </div>
-            <div className="mb-4 max-w-3xl space-y-6">
+            <div className="mb-4 space-y-6">
                 {questions.documents.map(ques => (
                     <QuestionCard key={ques.$id} ques={ques} />
                 ))}
