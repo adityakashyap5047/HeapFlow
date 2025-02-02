@@ -29,7 +29,7 @@ const LabelInputContainer = ({
                 className
             )}
         >
-            <Meteors number={30} />
+            <Meteors number={50} />
             {children}
         </div>
     );
@@ -169,7 +169,7 @@ const QuestionForm = ({ question }: { question?: Models.Document }) => {
     };
 
     return (
-        <form className="space-y-4" onSubmit={submit}>
+        <form className="space-y-4 p-2" onSubmit={submit}>
             {error && (
                 <LabelInputContainer>
                     <div className="text-center">
@@ -177,6 +177,18 @@ const QuestionForm = ({ question }: { question?: Models.Document }) => {
                     </div>
                 </LabelInputContainer>
             )}
+            <LabelInputContainer>
+    <Label>
+        <p className="text-xl pt-24">Need Help? Ask a Question</p>
+        <small className="text-gray-400">
+            <p className="pl-4 mt-4">- Write a **clear and specific** title.</p> 
+            <p className="pl-4 mt-1">- Describe your problem in detail (**min. 20 characters**).</p>   
+            <p className="pl-4 mt-1">- Upload an **image** if it helps explain your issue.</p>   
+            <p className="pl-4 mt-1">- Add **relevant tags** (e.g., JavaScript, Next.js, TypeScript).</p>   
+            <p className="pl-4 mt-1">- Be respectful and **follow community guidelines**.</p>
+        </small>
+    </Label>
+</LabelInputContainer>
             <LabelInputContainer>
                 <Label htmlFor="title">
                     Title Address
@@ -299,13 +311,15 @@ const QuestionForm = ({ question }: { question?: Models.Document }) => {
                     ))}
                 </div>
             </LabelInputContainer>
+            <div className="flex justify-center items-center">
             <button
-                className="inline-flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+                className="w-1/2 flex h-12 animate-shimmer items-center justify-center rounded-md border border-slate-800 bg-[linear-gradient(110deg,#000103,45%,#1e2631,55%,#000103)] bg-[length:200%_100%] px-6 font-medium text-slate-400 transition-colors focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
                 type="submit"
                 disabled={loading}
             >
                 {question ? "Update" : "Publish"}
             </button>
+            </div>
         </form>
     );
 };
