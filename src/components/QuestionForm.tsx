@@ -202,7 +202,7 @@ const QuestionForm = ({ question }: { question?: Models.Document }) => {
                     name="title"
                     placeholder="e.g. Is there an R function for finding the index of an element in a vector?"
                     type="text"
-                    className="text-black"
+                    className="text-white bg-[#020617] border border-gray-500 focus:border-gray-400 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
                     value={formData.title}
                     onChange={e => setFormData(prev => ({ ...prev, title: e.target.value }))}
                 />
@@ -261,7 +261,7 @@ const QuestionForm = ({ question }: { question?: Models.Document }) => {
                             name="tag"
                             placeholder="e.g. (java c objective-c)"
                             type="text"
-                            className="text-black"
+                            className="text-white bg-[#020617] border border-gray-500 focus:border-gray-400 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
                             value={tag}
                             onChange={e => setTag(() => e.target.value)}
                         />
