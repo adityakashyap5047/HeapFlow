@@ -76,7 +76,7 @@ export default function Login() {
                 <LabelInputContainer className="mb-4">
                     <Label htmlFor="email">Email Address</Label>
                     <Input
-                    className="text-black"
+                    className="text-white bg-[#020617] border border-gray-500 focus:border-gray-400 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0"
                         id="email"
                         name="email"
                         placeholder="projectmayhem@fc.com"
@@ -85,7 +85,7 @@ export default function Login() {
                 </LabelInputContainer>
                 <LabelInputContainer className="mb-4">
                     <Label htmlFor="password">Password</Label>
-                    <Input className="text-black" id="password" name="password" placeholder="••••••••" type="password" />
+                    <Input className="text-white bg-[#020617] border border-gray-500 focus:border-gray-400 focus:outline-none focus-visible:ring-0 focus-visible:ring-offset-0" id="password" name="password" placeholder="••••••••" type="password" />
                 </LabelInputContainer>
 
                 <button
