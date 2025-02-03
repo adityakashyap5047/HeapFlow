@@ -21,8 +21,8 @@ const Page = async ({
 
     const queries = [
         Query.orderDesc("$createdAt"),
-        Query.offset((+resolvedSearchParams.page - 1) * 25),
-        Query.limit(25),
+        Query.offset((+resolvedSearchParams.page - 1) * 10),
+        Query.limit(10),
     ];
 
     if (resolvedSearchParams.tag) queries.push(Query.equal("tags", resolvedSearchParams.tag));
@@ -87,7 +87,7 @@ const Page = async ({
                     <QuestionCard key={ques.$id} ques={ques} />
                 ))}
             </div>
-            <Pagination total={questions.total} limit={25} />
+            <Pagination total={questions.total} limit={10} />
         </div>
     );
 };

@@ -10,6 +10,26 @@ import slugify from "@/utils/slugify";
 import Link from "next/link";
 import { IconTrash } from "@tabler/icons-react";
 import VoteButtons from "./VoteButtons";
+import { cn } from "@/lib/utils";
+
+const LabelInputContainer = ({
+    children,
+    className,
+}: {
+    children: React.ReactNode;
+    className?: string;
+}) => {
+    return (
+        <div
+            className={cn(
+                "relative flex w-full flex-col space-y-2 overflow-hidden rounded-md border border-white/20 bg-slate-950 p-2",
+                className
+            )}
+        >
+            {children}
+        </div>
+    );
+};
 
 const Answers = ({
     answers: _answers,
@@ -20,11 +40,15 @@ const Answers = ({
 }) => {
     const [answers, setAnswers] = React.useState(_answers);
     const [newAnswer, setNewAnswer] = React.useState("");
+    const [error, setError] = React.useState("");
     const { user } = useAuthStore();
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!newAnswer || !user) return;
+        if (!newAnswer || !user){
+            setError(() => "You must be logged in or provide an answer before submitting.");
+            return;
+        }
 
         try {
             const response = await fetch("/api/answer", {
@@ -146,6 +170,13 @@ const Answers = ({
             <form onSubmit={handleSubmit} className="space-y-2">
                 <h2 className="mb-4 text-xl">Your Answer</h2>
                 <RTE value={newAnswer} onChange={value => setNewAnswer(() => value || "")} />
+                {error && (
+                    <LabelInputContainer>
+                        <div className="text-center">
+                            <span className="text-red-500">{error}</span>
+                        </div>
+                    </LabelInputContainer>
+                )}
                 <button className="shrink-0 rounded bg-orange-500 px-4 py-2 font-bold text-white hover:bg-orange-600">
                     Post Your Answer
                 </button>
