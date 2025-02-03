@@ -1,54 +1,16 @@
 "use client";
 import { Particles } from "@/components/magicui/particles";
-import { ShimmerButton } from "@/components/magicui/shimmer-button";
-import { IconCloud } from "@/components/magicui/icon-cloud";
-import { useAuthStore } from "@/store/Auth";
-import Link from "next/link";
+// import { ShimmerButton } from "@/components/magicui/shimmer-button";
+// import { useAuthStore } from "@/store/Auth";
+// import Link from "next/link";
 import React from "react";
 
-const slugs = [
-    "typescript",
-    "javascript",
-    "dart",
-    "java",
-    "react",
-    "flutter",
-    "android",
-    "html5",
-    "css3",
-    "nodedotjs",
-    "express",
-    "nextdotjs",
-    "prisma",
-    "amazonaws",
-    "postgresql",
-    "firebase",
-    "nginx",
-    "vercel",
-    "testinglibrary",
-    "jest",
-    "cypress",
-    "docker",
-    "git",
-    "jira",
-    "github",
-    "gitlab",
-    "visualstudiocode",
-    "androidstudio",
-    "sonarqube",
-    "figma",
-];
-
 const HeroSectionHeader = () => {
-    const { session } = useAuthStore();
-
-    const images = slugs.map(
-        (slug) => `https://cdn.simpleicons.org/${slug}/${slug}`,
-    );
+    // const { session } = useAuthStore();
     
 
     return (
-        <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4 py-10 min-h-screen">
             <Particles
                 className="fixed inset-0 h-full w-full"
                 quantity={500}
@@ -56,17 +18,26 @@ const HeroSectionHeader = () => {
                 color="#ffffff"
                 refresh
             />
-            <div className="relative z-10 grid grid-cols-1 gap-4 md:grid-cols-2">
+            <div className="relative z-10 grid grid-cols-1 gap-4 md:grid-cols-2 pt-36">
                 <div className="flex items-center justify-center">
-                    <div className="space-y-4 text-center">
+                    <div className="space-y-10 text-center">
                         <h1 className="pointer-events-none z-10 whitespace-pre-wrap bg-gradient-to-b from-[#ffd319] via-[#ff2975] to-[#8c1eff] bg-clip-text text-center text-7xl font-bold leading-none tracking-tighter text-transparent">
                             HeapFlow
                         </h1>
                         <p className="text-center text-xl font-bold leading-none tracking-tighter">
+                        Find Answers, Share Knowledge, and Build Community!
+                        </p>
+                        <p className="text-center text-xl font-bold leading-none tracking-tighter">
                             Ask questions, share knowledge, and collaborate with developers
                             worldwide. Join our community and enhance your coding skills!
                         </p>
-                        <div className="flex items-center justify-center gap-4">
+                        <p className="text-center text-xl font-bold leading-none tracking-tighter">
+                        Join a community of developers to ask questions, share insights, and help others solve coding challenges.
+                        </p>
+                        <p className="text-center text-xl font-bold leading-none tracking-tighter">
+                        Join a community of developers to ask questions, share insights, and help others solve coding challenges.
+                        </p>
+                        {/* <div className="flex items-center justify-center gap-4">
                             {session ? (
                                 <Link href="/questions/ask">
                                     <ShimmerButton className="shadow-2xl">
@@ -93,14 +64,15 @@ const HeroSectionHeader = () => {
                                     </Link>
                                 </>
                             )}
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <div className="flex items-center justify-center">
                     <div className="relative max-w-[32rem] overflow-hidden">
-                        <IconCloud images={images} />
+                        Some thing amazing
                     </div>
                 </div>
+                
             </div>
         </div>
     );
