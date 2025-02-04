@@ -5,6 +5,7 @@ import React from "react";
 import ScrollableMarquee from "./ScrollableMarquee";
 import { SparklesText } from "@/components/magicui/sparkles-text";
 import { LineShadowText } from "@/components/magicui/line-shadow-text";
+import Image from "next/image";
 
 const HeroSectionHeader = () => {    
 
@@ -47,7 +48,7 @@ const HeroSectionHeader = () => {
                 Find Answers, Share Knowledge, and Build Community!
             </span>
           </div>
-          <div className="flex flex-1 w-full rounded-lg mt-4 bg-gradient-to-br from-violet-500 via-purple-500 to-blue-500" />
+            <Image src="/HeapFlow.png" height={100} width={400} alt="HeapFlow Image" className="flex flex-1 w-full rounded mt-8 hover:mt-2 transition-all"/>
         </div>
       </PinContainer>
                     </div>
