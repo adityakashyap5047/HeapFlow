@@ -4,6 +4,7 @@ import { PinContainer } from "@/components/ui/3d-pin";
 import React from "react";
 import ScrollableMarquee from "./ScrollableMarquee";
 import { SparklesText } from "@/components/magicui/sparkles-text";
+import { LineShadowText } from "@/components/magicui/line-shadow-text";
 
 const HeroSectionHeader = () => {    
 
@@ -23,11 +24,10 @@ const HeroSectionHeader = () => {
                             HeapFlow
                         </h1>
                             <SparklesText text="Join a community of developers to ask questions, share insights, and help others solve coding challenges." className="text-center text-xl font-medium leading-7 text-gray-300"/>
-                        <p >
-                        
-                        </p>
-                        <p className="text-center text-xl text-gray-400 leading-6 ">
-                            “Sharing knowledge is the most fundamental act of friendship. Because it is a way you can give something without losing something.”
+                            <LineShadowText className="text-center text-xl text-gray-400 leading-6 italic" shadowColor="white">
+                                “Sharing knowledge is the most fundamental act of friendship. Because it is a way you can give something without losing something.”
+                            </LineShadowText>
+                        <p className="text-end text-xl leading-none">
                             <strong className="text-gray-300"> — Richard Stallman</strong>
                         </p>
                     </div>
