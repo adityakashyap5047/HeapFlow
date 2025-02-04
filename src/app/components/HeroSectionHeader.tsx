@@ -3,6 +3,7 @@ import { Particles } from "@/components/magicui/particles";
 import { PinContainer } from "@/components/ui/3d-pin";
 import React from "react";
 import ScrollableMarquee from "./ScrollableMarquee";
+import { SparklesText } from "@/components/magicui/sparkles-text";
 
 const HeroSectionHeader = () => {    
 
@@ -21,18 +22,13 @@ const HeroSectionHeader = () => {
                         <h1 className="pointer-events-none z-10 whitespace-pre-wrap bg-gradient-to-b from-[#ffd319] via-[#ff2975] to-[#8c1eff] bg-clip-text text-center text-7xl font-bold leading-none tracking-tighter text-transparent">
                             HeapFlow
                         </h1>
-                        <p className="text-center text-xl font-bold leading-none tracking-tighter">
-                        Find Answers, Share Knowledge, and Build Community!
+                            <SparklesText text="Join a community of developers to ask questions, share insights, and help others solve coding challenges." className="text-center text-xl font-medium leading-7 text-gray-300"/>
+                        <p >
+                        
                         </p>
-                        <p className="text-center text-xl font-bold leading-none tracking-tighter">
-                            Ask questions, share knowledge, and collaborate with developers
-                            worldwide. Join our community and enhance your coding skills!
-                        </p>
-                        <p className="text-center text-xl font-bold leading-none tracking-tighter">
-                        Join a community of developers to ask questions, share insights, and help others solve coding challenges.
-                        </p>
-                        <p className="text-center text-xl font-bold leading-none tracking-tighter">
-                        Join a community of developers to ask questions, share insights, and help others solve coding challenges.
+                        <p className="text-center text-xl text-gray-400 leading-6 ">
+                            “Sharing knowledge is the most fundamental act of friendship. Because it is a way you can give something without losing something.”
+                            <strong className="text-gray-300"> — Richard Stallman</strong>
                         </p>
                     </div>
                 </div>
