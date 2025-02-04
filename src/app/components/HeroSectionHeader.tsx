@@ -2,6 +2,7 @@
 import { Particles } from "@/components/magicui/particles";
 import { PinContainer } from "@/components/ui/3d-pin";
 import React from "react";
+import ScrollableMarquee from "./ScrollableMarquee";
 
 const HeroSectionHeader = () => {    
 
@@ -57,6 +58,7 @@ const HeroSectionHeader = () => {
                 </div>
                 
             </div>
+            <ScrollableMarquee/>
         </div>
     );
 };
