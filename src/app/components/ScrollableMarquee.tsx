@@ -1,5 +1,5 @@
 import { Marquee } from "@/components/magicui/marquee";
-import { cn } from "@/lib/utils";
+import { NeonGradientCard } from "@/components/ui/neon-gradient-card";
 
 const features = [
     {
@@ -34,37 +34,21 @@ const features = [
     }
   ];
 
-const ReviewCard = ({
-  title,
-  description
-}: {
-    title: string;
-    description: string;
-}) => {
-  return (
-    <figure
-      className={cn(
-        "relative w-64 cursor-pointer overflow-hidden rounded-xl border p-4",
-      )}
-    >
-      <div className="flex flex-row items-center gap-2">
-        <div className="flex flex-col">
-          <figcaption className="text-sm font-medium dark:text-white">
-            {title}
-          </figcaption>
-        </div>
-      </div>
-      <blockquote className="mt-2 text-sm">{description}</blockquote>
-    </figure>
-  );
-};
-
 export default function ScrollableMarquee() {
   return (
     <div className="relative flex w-full flex-col items-center justify-center overflow-hidden ">
       <Marquee pauseOnHover className="[--duration:25s]">
         {features.map((feature) => (
-          <ReviewCard key={feature.title} {...feature} />
+            <NeonGradientCard key={feature.title} className="max-w-sm items-center justify-center text-center">
+<div className="flex flex-row items-center gap-2">
+        <div className="flex flex-col">
+          <figcaption className="text-sm font-medium dark:text-white">
+            {feature.title}
+          </figcaption>
+        </div>
+      </div>
+      <blockquote className="mt-2 text-sm">{feature.description}</blockquote>
+          </NeonGradientCard>
         ))}
       </Marquee>
     </div>

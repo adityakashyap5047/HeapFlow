@@ -40,7 +40,8 @@ const config: Config = {
     			'border-beam': 'border-beam calc(var(--duration)*1s) infinite linear',
     			backgroundPositionSpin: 'background-position-spin 3000ms infinite alternate',
     			marquee: 'marquee var(--duration) infinite linear',
-    			'marquee-vertical': 'marquee-vertical var(--duration) linear infinite'
+    			'marquee-vertical': 'marquee-vertical var(--duration) linear infinite',
+    			'background-position-spin': 'background-position-spin 3000ms infinite alternate'
     		},
     		keyframes: {
     			'background-position-spin': {
