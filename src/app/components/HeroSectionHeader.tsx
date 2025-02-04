@@ -22,7 +22,7 @@ const HeroSectionHeader = () => {
             <div className="relative z-10 grid grid-cols-1 md:gap-4 md:grid-cols-2 pt-20">
                 <div className="flex items-center justify-center">
                     <div className="space-y-4 md:space-y-10 text-center">
-                        <h1 className="pointer-events-none z-10 whitespace-pre-wrap bg-gradient-to-b from-[#ffd319] via-[#ff2975] to-[#8c1eff] bg-clip-text text-center text-4xl md:text-7xl font-bold leading-none tracking-tighter text-transparent">
+                        <h1 className="pointer-events-none z-10 whitespace-pre-wrap bg-gradient-to-b from-[#ffd319] via-[#ff2975] to-[#8c1eff] bg-clip-text text-center text-5xl md:text-7xl font-bold leading-none tracking-tighter text-transparent">
                             HeapFlow
                         </h1>
                             <SparklesText text="Join a community of developers to ask questions, share insights, and help others solve coding challenges." className="text-center text-lg md:text-xl font-medium leading-7 text-gray-300"/>
